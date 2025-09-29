@@ -1,0 +1,21 @@
+name: Build and Deploy Static Website
+
+on:
+  push:
+    branches:
+      - main  # Deploy whenever main branch is updated
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./      # Root folder containing index.html
+        publish_branch: gh-pages  # Branch where site will be deployed
